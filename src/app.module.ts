@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
 import { UserModule } from './module/user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { config } from './config/ormconnect';
-import { UserEntity } from './entities/user';
+import { PlatformModule } from './module/platform/platform.module';
 
 
 @Module({
@@ -18,13 +17,14 @@ import { UserEntity } from './entities/user';
       timezone: "UTC",
       multipleStatements: true,
       dropSchema: false,
+      // sql将entity字段同步到数据库中
       synchronize: true,
       logging: true,
-      entities: [
-        UserEntity
-      ]
+      // 引入所有的实体
+      entities: [__dirname + '/**/*.entity{.ts,.js}']
     }),
-    UserModule
+    UserModule,
+    PlatformModule
   ],
   controllers: [],
   providers: [],
