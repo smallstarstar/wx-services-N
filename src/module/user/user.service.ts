@@ -1,3 +1,10 @@
+/*
+ * @Author: shichaoxin 
+ * @Date: 2020-04-15 10:21:48 
+ * @Last Modified by: shichaoxin
+ * @Last Modified time: 2020-04-15 10:37:40
+ */
+
 import { Injectable, Get, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../../entities/user.entity';
@@ -11,7 +18,6 @@ export class UserService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
-
     private platformService: PlatformService
   ) { }
 
@@ -69,7 +75,7 @@ export class UserService {
   }
 
   /**
-   * 用户注册
+   * 用户登录
    * @param username 
    * @param password 
    */

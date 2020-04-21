@@ -1,16 +1,16 @@
-import { Controller, Post, Get, Body, HttpStatus, HttpCode, HttpException, Request, Query, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Post, Get, Body, HttpStatus, HttpCode, HttpException, Request, Query, Param, Delete, Put, Inject } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { UserModel } from '../../model/user-model';
-// import { JwtService } from '@nestjs/jwt';
+import { JwtService } from '@nestjs/jwt';
 
 
 @Controller()
 @ApiTags('用户类接口')
 export class UserController {
   constructor(
-    private readonly userService: UserService
-    // private readonly jwtService: JwtService
+  private readonly userService: UserService,
+  // @Inject('JwtService')  private readonly jwtService: JwtService
   ) { }
 
 
@@ -39,7 +39,7 @@ export class UserController {
   //       throw new HttpException('未认证', HttpStatus.UNAUTHORIZED);
   //     }
 
-  //     const exist = await this.userService.findById(id);
+  //     // const exist = await this.userService.findById(id);
   //     // if (exist.id !== user.id && exist.role !== 'admin') {
   //     //   throw new HttpException('无权处理', HttpStatus.FORBIDDEN);
   //     // }

@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { UserModule } from './module/user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PlatformModule } from './module/platform/platform.module';
+import { AuthModule } from './module/auth/auth.module';
 
 
 @Module({
@@ -24,7 +25,8 @@ import { PlatformModule } from './module/platform/platform.module';
       entities: [__dirname + '/**/*.entity{.ts,.js}']
     }),
     UserModule,
-    PlatformModule
+    PlatformModule,
+    AuthModule
   ],
   controllers: [],
   providers: [],
