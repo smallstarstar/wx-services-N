@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PlatformModule } from './module/platform/platform.module';
 import { AuthModule } from './module/auth/auth.module';
 import { AddressModule } from './module/address/address.module';
+import { CategoryModule } from './module/category/category.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -27,6 +28,7 @@ import { AddressModule } from './module/address/address.module';
     PlatformModule,
     AuthModule,
     AddressModule,
+    CategoryModule,
   ],
   controllers: [],
   providers: [],

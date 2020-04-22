@@ -1,7 +1,8 @@
-import { Controller, Post, HttpCode, HttpStatus, Body, Get, Query, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Post, HttpCode, HttpStatus, Body, Get, Query, Param, Delete, Put, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { AddressService } from './address.service';
 import { AddressModel } from 'src/model/address-model';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller()
 @ApiTags('用户地址类接口')
@@ -24,6 +25,7 @@ export class AddressController {
     return this.addressService.addressPageable(page, size);
   }
   @Delete('/deteleByIds')
+  // @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: '批量删除一个或多个用户地址' })
   deleteUserAddress(@Body() ids: []) {
     return this.addressService.deleteMany(ids);
