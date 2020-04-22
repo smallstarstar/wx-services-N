@@ -40,4 +40,9 @@ export class CategoryController {
   getGoodsByIdAndPageable(@Param('typeId') typeId: string, @Query('page') page: number, @Query('size') size: number) {
     return this.categoryService.findGoodsByIdAndPagebale(typeId, page, size);
   }
+  @Get('/changeSale/:id')
+  @ApiOperation({ summary: '根据Id对商品进行上架或下架' })
+  changeSaleStatus(@Param('id') id: string) {
+    return this.categoryService.updateSale(id);
+  }
 }

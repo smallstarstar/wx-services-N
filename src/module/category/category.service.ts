@@ -6,6 +6,7 @@ import { CategoryModel } from 'src/model/category-model';
 import { GoodsEntity } from 'src/entities/goods.entity';
 import { GoodsModel } from 'src/model/goods-model';
 import { PageBean } from 'src/utils/page-bean';
+import { SaleStatus } from 'src/common/enum/sale-status';
 
 @Injectable()
 export class CategoryService {
@@ -65,6 +66,7 @@ export class CategoryService {
       throw new HttpException('参数错误', HttpStatus.BAD_REQUEST);
     }
     goodsModel.cTime = new Date().getTime();
+    goodsModel.saleState = SaleStatus.onSale;
     return await this.goodsRepository.save(goodsModel);
   }
   /**
@@ -94,5 +96,18 @@ export class CategoryService {
       orderBy('GoodsEntity.cTime', 'ASC').where('GoodsEntity.typeId = :typeId', { typeId }).skip(skip).take(limit).getMany();
     pageBean.total = await this.goodsRepository.createQueryBuilder().where('GoodsEntity.typeId = :typeId', { typeId }).getCount();
     return pageBean;
+  }
+  /**
+   * 根据Id对商品进行上架或下架
+   * @param id
+   */
+  async updateSale(id: string) {
+    const data = await this.goodsRepository.findOne({ id });
+    if (data.saleState === SaleStatus.onSale) {
+      await this.goodsRepository.update(id, { saleState: SaleStatus.upSale });
+    } else {
+      await this.goodsRepository.update(id, { saleState: SaleStatus.onSale });
+    }
+    return true;
   }
 }

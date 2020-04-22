@@ -29,6 +29,9 @@ export class GoodsEntity extends BaseEntity {
   @Column('int')
   saleCount: number;
 
+  @Column('int')
+  saleState: number;
+
   @Column('longtext')
   cTime: number;
 }

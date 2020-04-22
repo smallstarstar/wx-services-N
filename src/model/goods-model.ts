@@ -31,6 +31,6 @@ export class GoodsModel {
   @ApiProperty({ name: 'saleCount' })
   @IsNotEmpty({ message: '不能为空' })
   saleCount: number;
-
+  saleState!: number;
   cTime!: number;
 }
