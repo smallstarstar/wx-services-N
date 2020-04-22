@@ -3,8 +3,7 @@ import { UserModule } from './module/user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PlatformModule } from './module/platform/platform.module';
 import { AuthModule } from './module/auth/auth.module';
-
-
+import { AddressModule } from './module/address/address.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -15,18 +14,19 @@ import { AuthModule } from './module/auth/auth.module';
       password: '123456',
       database: 'store',
       charset: 'utf8mb4',
-      timezone: "UTC",
+      timezone: 'UTC',
       multipleStatements: true,
       dropSchema: false,
       // sql将entity字段同步到数据库中
       synchronize: true,
       logging: true,
       // 引入所有的实体
-      entities: [__dirname + '/**/*.entity{.ts,.js}']
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
     }),
     UserModule,
     PlatformModule,
-    AuthModule
+    AuthModule,
+    AddressModule,
   ],
   controllers: [],
   providers: [],

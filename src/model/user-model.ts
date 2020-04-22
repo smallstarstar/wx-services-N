@@ -1,5 +1,5 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty } from "class-validator";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty } from 'class-validator';
 
 export class UserModel {
   @ApiProperty({ name: 'username' })
@@ -24,5 +24,6 @@ export class UserModel {
 
   @ApiProperty({name: 'platId'})
   @IsNotEmpty({message: '不能为空'})
+  // tslint:disable-next-line:ban-types
   plat: Object;
 }

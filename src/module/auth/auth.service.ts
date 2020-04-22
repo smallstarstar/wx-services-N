@@ -18,14 +18,14 @@ export class AuthService {
   }
 
   async login(username: string, password: string) {
-    let data: any = await this.userService.findByUserNameAndPassword(username, password);
+    const data: any = await this.userService.findByUserNameAndPassword(username, password);
     // 创建token
     const token = this.createToken({
       id: data.id,
       username: data.username,
       phone: data.phone,
       password: data.password,
-      roleId: data.roleId
+      roleId: data.roleId,
     });
     return Object.assign(data, { token });
   }
@@ -34,4 +34,3 @@ export class AuthService {
     return await this.userService.findById(payload.id);
   }
 }
-

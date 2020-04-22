@@ -6,14 +6,14 @@ import { AuthService } from './auth.service';
 @ApiTags('认证平台接口')
 export class AuthController {
   constructor(
-    private readonly authService:AuthService
-  ) {}
+    private readonly authService: AuthService,
+  ) { }
 
   @Get('/login/username/:username/password/:password')
-  @ApiOperation({summary: '用户登录认证'})
+  @ApiOperation({ summary: '用户登录认证' })
   @HttpCode(HttpStatus.OK)
   @UseInterceptors(ClassSerializerInterceptor)
-  login(@Param('username') username: string, @Param('password') password: string,) {
+  login(@Param('username') username: string, @Param('password') password: string) {
     return this.authService.login(username, password);
   }
 }

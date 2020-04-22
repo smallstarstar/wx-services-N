@@ -9,7 +9,7 @@ import { JwtModuleOptions, JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([UserEntity]), PlatformModule
+    TypeOrmModule.forFeature([UserEntity]), PlatformModule,
   ],
   exports: [UserService],
   providers: [UserService],

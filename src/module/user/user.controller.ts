@@ -3,8 +3,6 @@ import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { UserModel } from '../../model/user-model';
 import { JwtService } from '@nestjs/jwt';
-
-
 @Controller()
 @ApiTags('用户类接口')
 export class UserController {
@@ -12,8 +10,6 @@ export class UserController {
   private readonly userService: UserService,
   // @Inject('JwtService')  private readonly jwtService: JwtService
   ) { }
-
-
   @Post('/registor')
   @ApiOperation({ summary: '用户注册' })
   @HttpCode(HttpStatus.CREATED)
@@ -57,8 +53,6 @@ export class UserController {
   deleteUserInfoById(@Query('id') id: string) {
     return this.userService.deleteUserInfo(id);
   }
-
-
   @Get('/userInfo')
   @ApiOperation({ summary: '获取全部用户信息' })
   getUserInfoList() {
