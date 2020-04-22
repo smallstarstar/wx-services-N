@@ -8,7 +8,7 @@ typeorm主要的方法
  + remove
  + insert
  + update // (id, data)
- + delete // 只需要传入id
+ + delete // delete(ids) --->ids  [1,2,3,4]
  + count
  + find // find 沒传入参数代表获取全部资料
  + findAndCount
@@ -114,5 +114,34 @@ const users = await getRepository(User)
     .skip(5)
     .take(10)
     .getMany();
+```
+
+#### 分页
+
+```javascript
+async findGoodsByPageable(page: number, size: number) {
+    const pageBean = new PageBean();
+    const limit = size;
+    const skip = (page - 1) * limit;
+    pageBean.list = await this.goodsRepository.createQueryBuilder().orderBy('GoodsEntity.cTime', 'ASC').skip(skip).take(limit).getMany();
+    pageBean.total = await this.goodsRepository.count();
+    return pageBean;
+  }
+  /**
+   * 根据typeId获取种类信息
+   * @param typeId
+   * @param page
+   * @param size
+   */
+async findGoodsByIdAndPagebale(typeId: string, page: number, size: number) {
+    const pageBean = new PageBean();
+    const limit = size;
+    const skip = (page - 1) * limit;
+    pageBean.list = await this.goodsRepository.createQueryBuilder().
+      orderBy('GoodsEntity.cTime', 'ASC').where('GoodsEntity.typeId = :typeId', { typeId }).skip(skip).take(limit).getMany();
+    pageBean.total = await this.goodsRepository.createQueryBuilder().where('GoodsEntity.typeId = :typeId', { typeId }).getCount();
+    return pageBean;
+  }
+}
 ```
 
