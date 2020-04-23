@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 export class PlatformService {
   constructor(
     @InjectRepository(PlatEntity)
-    private readonly platRepository: Repository<PlatEntity>
+    private readonly platRepository: Repository<PlatEntity>,
   ) {}
 
   async savePlat(platFormModel: Partial<PlatEntity>) {
@@ -15,6 +15,6 @@ export class PlatformService {
   }
 
   async findById() {
-    return await this.platRepository.findOneOrFail('e2d76e33-98b3-4683-ae00-caea6c71dd15')
+    return await this.platRepository.findOneOrFail('e2d76e33-98b3-4683-ae00-caea6c71dd15');
   }
 }

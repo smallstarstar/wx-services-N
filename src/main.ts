@@ -7,8 +7,7 @@ async function bootstrap() {
   // 允许跨域
   app.enableCors();
   // 设置统一的头url
-  app.setGlobalPrefix('/api/v1')
-  
+  app.setGlobalPrefix('/api/v1');
   // 验证管道
   const options = new DocumentBuilder()
     .setTitle('服务接口')

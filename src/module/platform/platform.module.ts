@@ -5,8 +5,8 @@ import { PlatformService } from './platform.service';
 import { PlatformController } from './platform.controller';
 
 @Module({
-  imports:[
-    TypeOrmModule.forFeature([PlatEntity])
+  imports: [
+    TypeOrmModule.forFeature([PlatEntity]),
   ],
   exports: [PlatformService],
   providers: [PlatformService],
