@@ -14,6 +14,10 @@ export class CommitModel {
   @IsNotEmpty({ message: '不能为空' })
   userImg: string;
 
+  @ApiProperty({ name: 'targetId' })
+  @IsNotEmpty({ message: '不能为空' })
+  targetId: string;
+
   @ApiProperty({ name: 'rank' })
   @IsNotEmpty({ message: '不能为空' })
   rank: number;

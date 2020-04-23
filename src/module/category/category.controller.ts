@@ -5,7 +5,7 @@ import { CategoryModel } from 'src/model/category-model';
 import { GoodsModel } from 'src/model/goods-model';
 
 @Controller()
-@ApiTags('种类信息类接口')
+@ApiTags('种类&类型信息类接口')
 export class CategoryController {
   constructor(
     private readonly categoryService: CategoryService,

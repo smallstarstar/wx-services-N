@@ -7,8 +7,8 @@
 
 import { BaseEntity, PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
 
-@Entity('commit')
-export class CommitEntity extends BaseEntity {
+@Entity('collect')
+export class CollectEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -19,14 +19,5 @@ export class CommitEntity extends BaseEntity {
   targetId: string;
 
   @Column('longtext')
-  detail: string;
-
-  @Column('int')
-  rank: number;
-
-  @Column('longtext')
   cTime: number;
-
-  @Column('longtext')
-  userImg: string;
 }
