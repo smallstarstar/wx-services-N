@@ -12,7 +12,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       secretOrKey: 'services',
     });
   }
-
+  /**
+   * 解析token;
+   * @param payload
+   */
   async validate(payload: UserEntity) {
     const user = await this.authService.validateUser(payload);
 

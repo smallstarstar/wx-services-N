@@ -8,6 +8,7 @@ import { AuthGuard } from '@nestjs/passport';
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
   getRequest(context: ExecutionContext) {
+    // tslint:disable-next-line:no-console
     const ctx = context.switchToHttp();
     const request = ctx.getRequest();
     return request;
@@ -15,7 +16,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 
   handleRequest(err: any, user: any, info: any) {
     if (err || !user) {
-      throw new UnauthorizedException('身份验证失败');
+      throw new UnauthorizedException('身份验证失败l');
     }
     return user;
   }
