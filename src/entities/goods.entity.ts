@@ -2,10 +2,11 @@
  * @Author: shichaoxin
  * @Date: 2020-04-22 17:01:35
  * @Last Modified by: shichaoxin
- * @Last Modified time: 2020-04-22 17:11:54
+ * @Last Modified time: 2020-05-02 21:13:48
  */
 
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { CollectEntity } from './collect.entity';
 @Entity('goods')
 export class GoodsEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
@@ -16,6 +17,9 @@ export class GoodsEntity extends BaseEntity {
 
   @Column('varchar')
   goodsName: string;
+
+  @Column('longtext')
+  goodsImg: string;
 
   @Column('double')
   price: number;
@@ -34,4 +38,7 @@ export class GoodsEntity extends BaseEntity {
 
   @Column('longtext')
   cTime: number;
+
+  @Column('boolean')
+  advise: boolean;
 }

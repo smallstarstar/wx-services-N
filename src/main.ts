@@ -18,6 +18,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   // 访问swagger地址是localhost:9000/swagger;
   SwaggerModule.setup('/swagger', app, document);
-  await app.listen(9000);
+  await app.listen(8666);
 }
 bootstrap();

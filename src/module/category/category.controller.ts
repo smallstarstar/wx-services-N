@@ -30,7 +30,7 @@ export class CategoryController {
   saveGoodsInfo(@Body() goodsModel: GoodsModel) {
     return this.categoryService.saveGoods(goodsModel);
   }
-  @Get('/getGoods/:page/:size')
+  @Get('/getGoods/')
   @ApiOperation({ summary: '分页获取全部信息' })
   getGoodsByPageable(@Query('page') page: number, @Query('size') size: number) {
     return this.categoryService.findGoodsByPageable(page, size);
@@ -44,5 +44,15 @@ export class CategoryController {
   @ApiOperation({ summary: '根据Id对商品进行上架或下架' })
   changeSaleStatus(@Param('id') id: string) {
     return this.categoryService.updateSale(id);
+  }
+  @Get('/findGoodsById/:id/:userId')
+  @ApiOperation({ summary: '根据Id查询商品的信息' })
+  searchGoodsInfoById(@Param('id') id: string, @Param('userId') userId: string) {
+    return this.categoryService.findOneById(id, userId);
+  }
+  @Get('/findGoodsById/')
+  @ApiOperation({ summary: '根据商品的名称模糊查询' })
+  findGoodsByKeyWord(@Query('name') name: string) {
+    return this.categoryService.findListByKeyWord(name);
   }
 }

@@ -1,18 +1,18 @@
 import {
   Controller, Post, Get, Body, HttpStatus, HttpCode,
-  Request, Query, Param, Delete, Put, Headers, UseGuards,
+  Request, Query, Param, Delete, Put, Headers, UseGuards, HttpException, Inject,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { UserModel } from '../../model/user-model';
-import CheckToken from 'src/utils/check-token';
+import { JwtService } from '@nestjs/jwt';
 @Controller()
 @ApiTags('用户类接口')
 export class UserController {
   constructor(
     private readonly userService: UserService,
+    private readonly jwtService: JwtService,
   ) { }
-  private checkOut: CheckToken;
   @Post('/registor')
   @ApiOperation({ summary: '用户注册' })
   @HttpCode(HttpStatus.CREATED)
@@ -35,9 +35,31 @@ export class UserController {
   }
   @Get('/userInfo')
   @ApiOperation({ summary: '获取全部用户信息' })
-  getUserInfoList(@Headers('token') token: string) {
-    this.checkOut.checkToken(token, '');
+  async getUserInfoList(@Headers('token') token: string) {
+    await this.checkPermission(token, '');
     return this.userService.findAll();
+  }
+  async checkPermission(req, user) {
+    let token = req;
+
+    if (!token) {
+      throw new HttpException('未认证', HttpStatus.UNAUTHORIZED);
+    }
+
+    if (/Bearer/.test(token)) {
+      // 不需要 Bearer，否则验证失败
+      token = token.split(' ').pop();
+    }
+    const tokenUser = this.jwtService.decode(token) as any;
+    const id = tokenUser.id;
+    if (!id) {
+      throw new HttpException('未认证', HttpStatus.UNAUTHORIZED);
+    }
+
+    // const exist = await this.userService.findById(id);
+    // if (exist.id !== user.id && exist.role !== 'admin') {
+    //   throw new HttpException('无权处理', HttpStatus.FORBIDDEN);
+    // }
   }
 
   @Get('/userInfo/:page/:size')

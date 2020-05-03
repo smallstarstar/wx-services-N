@@ -30,4 +30,5 @@ export class UserEntity extends BaseEntity {
   // 关联性id
   @RelationId((user: UserEntity) => user.plat)
   platId: string;
+  role: string;
 }

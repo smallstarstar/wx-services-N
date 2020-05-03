@@ -5,21 +5,21 @@
  * @Last Modified time: 2020-04-27 21:19:23
  */
 
-import { Injectable, Get, HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable, Get, HttpException, HttpStatus, Inject, forwardRef } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../../entities/user.entity';
 import { Repository } from 'typeorm';
 import { UserModel } from '../../model/user-model';
 import { PlatformService } from '../platform/platform.service';
 import { PageBean } from 'src/utils/page-bean';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
-    private platformService: PlatformService,
-  ) { }
+    private platformService: PlatformService) { }
 
   /**
    * 保存用户信息
@@ -45,13 +45,13 @@ export class UserService {
   }
 
   async getUserById(id): Promise<UserEntity> {
-    // return await this.userRepository.findOne(id, { relations: ['plat'] });
+    return await this.userRepository.findOne(id, { relations: ['plat'] });
     // relations指定载入关联属性，是阵列，可能有多个导览属性
     // return await this.userRepo.findOneOrFail(id); // 以id搜寻，没找到会丢出例外
-    return await this.userRepository
-      .createQueryBuilder()
-      .where('UserEntity.id = :id', { id })
-      .getOne();
+    // return await this.userRepository
+    //   .createQueryBuilder()
+    //   .where('UserEntity.id = :id', { id })
+    //   .getOne();
   }
 
   /**

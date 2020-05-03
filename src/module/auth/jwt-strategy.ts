@@ -8,8 +8,9 @@ import { UserEntity } from 'src/entities/user.entity';
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private readonly authService: AuthService) {
     super({
+      // 从接口中获取token
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: 'services',
+      secretOrKey: 'jwt',
     });
   }
   /**

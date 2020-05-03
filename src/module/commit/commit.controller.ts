@@ -30,9 +30,14 @@ export class CommitController {
   saveCollect(@Body() collectModel: CollectModel) {
     return this.commitService.saveCollect(collectModel);
   }
-  @Delete('/cancel/:id')
+  @Delete('/cancel')
   @ApiOperation({ summary: '取消收藏' })
   cancelCollect(@Query('id') id: string) {
     return this.commitService.cancelCollect(id);
+  }
+  @Get('/getCollectList/:userId')
+  @ApiOperation({ summary: '根据用户获取用户收藏列表' })
+  getCollectList(@Param('userId') userId: string) {
+    return this.commitService.getCollectInfoByUserId(userId);
   }
 }

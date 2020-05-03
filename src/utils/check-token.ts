@@ -1,12 +1,10 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UserService } from '../module/user/user.service';
 import { JwtService } from '@nestjs/jwt';
-
+@Injectable()
 class CheckToken {
   constructor(private userService: UserService, private jwtService: JwtService) { }
-  async  checkToken(req: any, user: any) {
-    let token = req.headers.authorization;
-
+  async  checkToken(token: any, user: any) {
     if (!token) {
       throw new HttpException('未认证', HttpStatus.UNAUTHORIZED);
     }
@@ -16,6 +14,7 @@ class CheckToken {
       token = token.split(' ').pop();
     }
     const tokenUser = this.jwtService.decode(token) as any;
+
     const id = tokenUser.id;
 
     if (!id) {

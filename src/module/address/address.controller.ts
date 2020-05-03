@@ -1,4 +1,4 @@
-import { Controller, Post, HttpCode, HttpStatus, Body, Get, Query, Param, Delete, Put, UseGuards } from '@nestjs/common';
+import { Controller, Post, HttpCode, HttpStatus, Body, Get, Query, Param, Delete, Put, UseGuards, Headers } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { AddressService } from './address.service';
 import { AddressModel } from 'src/model/address-model';
@@ -15,6 +15,7 @@ export class AddressController {
     return this.addressService.saveAddress(addressModel);
   }
   @Get('/userAddress/:userId')
+  // @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: '根据用户的id获取用户已经填写的地址' })
   getUserAddressByUserId(@Query('userId') userId: string) {
     return this.addressService.findAllById(userId);

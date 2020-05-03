@@ -2,7 +2,7 @@
  * @Author: shichaoxin
  * @Date: 2020-04-22 14:44:00
  * @Last Modified by: shichaoxin
- * @Last Modified time: 2020-04-22 15:49:01
+ * @Last Modified time: 2020-05-02 17:16:01
  */
 
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
@@ -77,7 +77,11 @@ export class AddressService {
     if (!id || addressModel.phone.length !== 11 || !addressModel.provice || !addressModel.city || !addressModel.detail) {
       throw new HttpException('参数错误', HttpStatus.BAD_REQUEST);
     }
+    // 判断是否是默认地址==>是，则其他默认地址进行至false===》保存
     await this.addressReposity.update(id, addressModel);
+    if (addressModel.isdefault) {
+      await this.addressReposity.createQueryBuilder().where({ id: ['<>', id], userId: addressModel.userId }).update({ isdefault: false });
+    }
     return true;
   }
 }

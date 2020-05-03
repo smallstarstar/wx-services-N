@@ -15,6 +15,15 @@ export class AddressEntity extends BaseEntity {
   userId: string;
 
   @Column('varchar')
+  username: string;
+
+  @Column('int')
+  isdefault: boolean;
+
+  @Column('varchar')
+  remark: string;
+
+  @Column('varchar')
   phone: string;
 
   @Column('varchar')

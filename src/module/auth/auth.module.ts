@@ -8,8 +8,8 @@ import { JwtStrategy } from './jwt-strategy';
 
 const passModule = PassportModule.register({ defaultStrategy: 'jwt' });
 const jwtModule = JwtModule.register({
-  secret: 'services',
-  signOptions: { expiresIn: '7d' },
+  secret: 'jwt',
+  signOptions: { expiresIn: '3600s' },
 });
 
 @Module({
