@@ -48,14 +48,25 @@ export class AuthService {
    * 微信登录
    * @param code
    */
-  // wxLogin(code: any, username: any, userImg: any, userGender: string) {
-  // tslint:disable-next-line:max-line-length
-  //   const url: any = `${WxConfigData.wxLoginUrl}?appid=${WxConfigData.wxAppid}&secret=${WxConfigData.wxAppSecret}&js_code=${code}&grant_type=authorization_code'`;
-  //   const data = this.httpClientService.post(url);
-  //   // 组装token;
-  //   // const token = this.createToken({
-  //   //   username,
-  //   // });
-  //   return Object.assign(data, { token });
-  // }
+  wxLogin(code: any, username: any, userGender: string) {
+    const url: any = `${WxConfigData.wxLoginUrl}
+    ?appid=${WxConfigData.wxAppid}&secret=${WxConfigData.wxAppSecret}
+    &js_code=${code}&grant_type=authorization_code'`;
+    // tslint:disable-next-line:no-console
+    console.log('==============', url);
+    const data: any = this.httpClientService.post(url);
+    // 组装token;
+    const payload = {
+      username,
+      userGender,
+    };
+    const token: any = this.jwtService.sign(payload, {
+      // token过期时间 7d;
+      expiresIn: '7d',
+    });
+    const tokenInfo: any = {};
+    tokenInfo.token = token;
+    tokenInfo.ttl = 60 * 60 * 24 * 7;
+    return Object.assign({ data }, { tokenInfo });
+  }
 }

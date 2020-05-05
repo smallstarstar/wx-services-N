@@ -82,7 +82,10 @@ export class CategoryService {
     const pageBean = new PageBean();
     const limit = +size;
     const skip = (+page - 1) * limit;
-    pageBean.list = await this.goodsRepository.createQueryBuilder().orderBy('GoodsEntity.cTime', 'ASC').skip(+skip).take(limit).getMany();
+    pageBean.list = await this.goodsRepository.createQueryBuilder()
+      .leftJoinAndMapOne('GoodsEntity.typeId', CategoryEntity, 'CategoryEntity', 'GoodsEntity.typeId = CategoryEntity.typeId ')
+      .where('GoodsEntity.advise = true')
+      .orderBy('GoodsEntity.cTime', 'ASC').skip(+skip).take(limit).getMany();
     pageBean.total = await this.goodsRepository.count();
     return pageBean;
   }

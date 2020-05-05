@@ -7,6 +7,7 @@ import { AddressModule } from './module/address/address.module';
 import { CategoryModule } from './module/category/category.module';
 import { CommitController } from './module/commit/commit.controller';
 import { CommitModule } from './module/commit/commit.module';
+import { PayModule } from './module/pay/pay.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -32,6 +33,7 @@ import { CommitModule } from './module/commit/commit.module';
     AddressModule,
     CategoryModule,
     CommitModule,
+    PayModule,
   ],
   controllers: [CommitController],
   providers: [],
