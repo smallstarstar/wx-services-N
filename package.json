@@ -43,7 +43,7 @@
     "helmet": "^3.21.2",
     "highlight.js": "^9.18.0",
     "log4js": "^6.1.0",
-    "marked": "^0.8.0",
+    "marked": "^4.0.10",
     "mongoose": "^5.9.1",
     "mysql": "^2.0.1",
     "nestjs-typegoose": "^7.1.0",
